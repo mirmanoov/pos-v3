@@ -14,8 +14,8 @@
 <script>
 import { watch } from "vue";
 import { useSearchStore } from "/src/stores/searchStore.js";
-import Navbar from "/src/components/Navbar.vue";
-import Sidebar from "/src/components/Sidebar.vue";
+import Navbar from "/src/components/navbar.vue";
+import Sidebar from "/src/components/sidebar.vue";
 import tables from "/src/components/tables.vue";
 import menu from "/src/components/menu.vue";
 import payment from "/src/components/payment.vue";
