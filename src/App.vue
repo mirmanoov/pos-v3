@@ -3,7 +3,15 @@
     <!-- Navbar Component -->
     <Navbar />
 
-    <div class="container">
+    <!-- Google Login Modal -->
+    <GoogleLoginModal
+      v-if="showLoginModal"
+      @close="showLoginModal = false"
+      @login-success="onLoginSuccess"
+      @login-failure="onLoginFailure"
+    />
+
+    <div class="container" v-if="isAuthenticated">
       <!-- Sidebar Component -->
       <Sidebar @link-selected="updateMainComponent" />
 
@@ -14,6 +22,7 @@
 <script>
 import { watch } from "vue";
 import { useSearchStore } from "/src/stores/searchStore.js";
+import GoogleLoginModal from "/src/components/GoogleLoginModal.vue";
 import Navbar from "/src/components/navbar.vue";
 import Sidebar from "/src/components/sidebar.vue";
 import tables from "/src/components/tables.vue";
@@ -28,10 +37,13 @@ export default {
   components: {
     Navbar,
     Sidebar,
+    GoogleLoginModal,
   },
   data() {
     return {
       currentComponent: tables,
+      showLoginModal: true, // Initially true to show login on app load
+      isAuthenticated: false, // Authentication state
     };
   },
   mounted() {
@@ -70,6 +82,15 @@ export default {
         default:
           this.currentComponent = null;
       }
+    },
+    onLoginSuccess(googleUser) {
+      this.isAuthenticated = true;
+      this.showLoginModal = false;
+      // You can store the googleUser details or token as needed
+    },
+    onLoginFailure(error) {
+      console.error("Login Failed:", error);
+      // Handle login failure, such as re-showing the login modal
     },
   },
 };
