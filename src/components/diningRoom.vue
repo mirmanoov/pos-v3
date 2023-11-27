@@ -158,8 +158,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 120px; /* Space between rows */
-  margin-top: 50px;
+  gap: 12vh;
+  margin-top: 5vh;
   background-color: var(--active-color);
 }
 
@@ -179,7 +179,7 @@ export default {
   display: flex;
   justify-content: center;
   justify-content: space-between;
-  gap: 100px; /* Space between tables in the same row */
+  gap: 7vw; /* Space between tables in the same row */
 }
 
 .table-container {
@@ -198,15 +198,15 @@ export default {
 }
 
 .rectangle-table {
-  width: 80px;
-  height: 150px;
+  width: 5vw;
+  height: 20vh;
   position: relative;
   z-index: 1;
 }
 
 .big-rectangle-table {
-  width: 250px;
-  height: 100px;
+  width: 18vw;
+  height: 12vh;
   position: relative;
   z-index: 1;
 }
@@ -223,8 +223,8 @@ export default {
   left: 130%;
 }
 .round-table {
-  width: 75px;
-  height: 75px;
+  width: 5vw;
+  height: 9vh;
   border-radius: 50%;
   position: relative;
   z-index: 1;
@@ -232,8 +232,8 @@ export default {
 
 .chair {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 2vw;
+  height: 3vh;
 }
 
 /* Round table chairs */

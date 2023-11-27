@@ -165,8 +165,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 120px; /* Space between rows */
-  margin-top: 50px;
+  gap: 12vh;
+  margin-top: 5vh;
   background-color: var(--active-color);
 }
 
@@ -174,7 +174,7 @@ export default {
   display: flex;
   justify-content: center;
   justify-content: space-between;
-  gap: 100px; /* Space between tables in the same row */
+  gap: 8vw; /* Space between tables in the same row */
 }
 
 .table-container {
@@ -188,8 +188,8 @@ export default {
   align-items: center;
   background-color: var(--table-bg-color);
   border: 2px solid var(--table-border-color);
-  width: 75px;
-  height: 75px;
+  width: 5vw;
+  height: 9vh;
   border-radius: 50%;
   position: relative;
   z-index: 1;
@@ -205,16 +205,16 @@ export default {
 }
 
 .big-rectangle-table {
-  width: 250px;
-  height: 100px;
+  width: 18vw;
+  height: 12vh;
   position: relative;
   z-index: 1;
 }
 
 .chair {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 2vw;
+  height: 3vh;
 }
 
 .reserved-table .rectangle-table,
@@ -234,14 +234,6 @@ export default {
   top: -35px;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.round-table {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  position: relative;
-  z-index: 1;
 }
 
 .chair {

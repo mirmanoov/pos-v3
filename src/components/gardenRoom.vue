@@ -220,15 +220,15 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 120px; /* Space between rows */
-  margin-top: 50px;
+  gap: 12vh;
+  margin-top: 5vh;
   background-color: var(--active-color);
 }
 
 .table-row {
   display: flex;
   justify-content: center;
-  gap: 50px; /* Space between tables in the same row */
+  gap: 3vw; /* Space between tables in the same row */
 }
 
 .table-container {
@@ -260,8 +260,8 @@ export default {
   align-items: center;
   background-color: var(--table-bg-color);
   border: 2px solid var(--table-border-color);
-  width: 100px;
-  height: 100px;
+  width: 7vw;
+  height: 12vh;
   position: relative;
   z-index: 1;
 }
@@ -272,16 +272,28 @@ export default {
   align-items: center;
   background-color: var(--table-bg-color);
   border: 2px solid var(--table-border-color);
-  width: 250px;
-  height: 100px;
+  width: 18vw;
+  height: 12vh;
   position: relative;
   z-index: 1;
+}
+.flower-container {
+  width: 20vw; /* Adjust this as needed */
+  height: 14vh; /* This makes the container square, adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flowers {
+  width: 100%;
+  height: auto;
 }
 
 .chair {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 2vw;
+  height: 3vh;
 }
 
 /* Square table chairs */

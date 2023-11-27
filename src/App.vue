@@ -1,17 +1,16 @@
 <template>
-  <div>
+  <!-- Google Login Modal -->
+  <GoogleLoginModal
+    v-if="showLoginModal"
+    @close="showLoginModal = false"
+    @login-success="onLoginSuccess"
+    @login-failure="onLoginFailure"
+  />
+  <div v-if="isAuthenticated">
     <!-- Navbar Component -->
     <Navbar />
 
-    <!-- Google Login Modal -->
-    <GoogleLoginModal
-      v-if="showLoginModal"
-      @close="showLoginModal = false"
-      @login-success="onLoginSuccess"
-      @login-failure="onLoginFailure"
-    />
-
-    <div class="container" v-if="isAuthenticated">
+    <div class="container">
       <!-- Sidebar Component -->
       <Sidebar @link-selected="updateMainComponent" />
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="dining-room">
+  <div class="VIPRoom">
     <!-- Row 1: Rectangle Tables D1 to D4 with 4 chairs each -->
     <div class="table-row-1">
       <div
@@ -157,12 +157,12 @@ export default {
 </script>
 
 <style scoped>
-.dining-room {
+.VIPRoom {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 120px; /* Space between rows */
-  margin-top: 50px;
+  gap: 12vh;
+  margin-top: 5vh;
   background-color: var(--active-color);
 }
 
@@ -170,6 +170,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.flowers {
+  width: 100%;
+  height: auto;
 }
 
 .table-row-1 {
@@ -191,8 +196,7 @@ export default {
 }
 
 .rectangle-table,
-.big-rectangle-table,
-.round-table {
+.big-rectangle-table {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -201,15 +205,15 @@ export default {
 }
 
 .rectangle-table {
-  width: 80px;
-  height: 350px;
+  width: 6vw;
+  height: 50vh;
   position: relative;
   z-index: 1;
 }
 
 .big-rectangle-table {
-  width: 250px;
-  height: 100px;
+  width: 18vw;
+  height: 12vh;
   position: relative;
   z-index: 1;
 }
@@ -219,18 +223,11 @@ export default {
   transform: translateX(-50%);
 }
 .chair-left {
-  right: 95%;
+  right: 6vw;
 }
 
 .chair-right {
-  left: 130%;
-}
-.round-table {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  position: relative;
-  z-index: 1;
+  left: 8vw;
 }
 
 .chair {
@@ -252,14 +249,12 @@ export default {
   transform: translateX(-50%);
 }
 .reserved-table .rectangle-table,
-.reserved-table .big-rectangle-table,
-.reserved-table .round-table {
+.reserved-table .big-rectangle-table {
   background-color: yellow; /* or any color you prefer */
 }
 
 .active-order-table .rectangle-table,
-.active-order-table .big-rectangle-table,
-.active-order-table .round-table {
+.active-order-table .big-rectangle-table {
   background-color: #91f8b4; /* or any color you prefer for active orders */
 }
 
