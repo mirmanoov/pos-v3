@@ -14,7 +14,6 @@
           />
           <img
             :src="editIconSrc"
-            src="/edit.svg"
             class="edit-icon"
             alt="Edit Icon"
             @click="triggerFileInput"
