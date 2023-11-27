@@ -23,6 +23,7 @@
           id="password"
           v-model="password"
           placeholder="Enter password"
+          @keyup.enter="loginWithCredentials"
         />
       </div>
       <button @click="loginWithCredentials">Login</button>
