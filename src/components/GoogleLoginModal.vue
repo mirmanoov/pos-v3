@@ -3,7 +3,7 @@
     <div class="modal-content">
       <h2>Login</h2>
       <!-- Google Login -->
-      <GoogleLogin :callback="callback" />
+      <GoogleLogin :callback="callback" class="log" />
       <div class="divider">OR</div>
 
       <!-- Username and Password Login -->
@@ -78,6 +78,10 @@ export default {
   gap: 2vh;
   width: 40vw;
   height: auto; /* Set a fixed width for the modal */
+}
+
+.log {
+  width: 70%;
 }
 
 .modal-content h2 {
