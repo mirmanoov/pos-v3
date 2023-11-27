@@ -81,7 +81,7 @@ export default {
 }
 
 .log {
-  width: 70%;
+  width: 28vw;
 }
 
 .modal-content h2 {
