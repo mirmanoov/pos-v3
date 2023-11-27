@@ -25,6 +25,7 @@ import GoogleLoginModal from "/src/components/GoogleLoginModal.vue";
 import Navbar from "/src/components/navbar.vue";
 import Sidebar from "/src/components/sidebar.vue";
 import tables from "/src/components/tables.vue";
+import settings from "/src/components/settings.vue";
 import menu from "/src/components/menu.vue";
 import payment from "/src/components/payment.vue";
 import delivery from "/src/components/delivery.vue";
@@ -77,6 +78,9 @@ export default {
           break;
         case "RESERVATION":
           this.currentComponent = reservations;
+          break;
+        case "SETTINGS":
+          this.currentComponent = settings;
           break;
         default:
           this.currentComponent = null;

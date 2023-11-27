@@ -64,7 +64,9 @@
             </div>
             <div class="order-wrapper">
               <p class="p">Total Amount:</p>
-              <p class="text">{{ formatMoney(selectedOrder.total) }} RM</p>
+              <p class="text">
+                {{ $t("currency") }} {{ formatMoney(selectedOrder.total) }}
+              </p>
             </div>
           </div>
           <div class="method-btn">
@@ -130,7 +132,7 @@
         <div v-if="paymentMethod === 'cash'" class="cashInput">
           <div class="add-cash">Add cash received:</div>
           <div class="input-wrapper">
-            <span class="currency">RM</span>
+            <span class="currency">{{ $t("currency") }}</span>
             <input
               type="number"
               class="minimalist-input"
@@ -157,16 +159,21 @@
         </div>
         <div class="order-summary">
           <p class="subtotal">
-            Subtotal: RM {{ formatMoney(selectedOrder.subtotal) }}
+            Subtotal: {{ $t("currency") }}
+            {{ formatMoney(selectedOrder.subtotal) }}
           </p>
           <p class="serviceCharge">
-            Service Charge (10%): RM
+            Service Charge (10%): {{ $t("currency") }}
             {{ formatMoney(selectedOrder.serviceCharge) }}
           </p>
-          <p class="gst">GST (6%): RM {{ formatMoney(selectedOrder.gst) }}</p>
-          <p class="total">Total: RM {{ formatMoney(selectedOrder.total) }}</p>
+          <p class="gst">
+            GST (6%): {{ $t("currency") }} {{ formatMoney(selectedOrder.gst) }}
+          </p>
+          <p class="total">
+            Total: {{ $t("currency") }} {{ formatMoney(selectedOrder.total) }}
+          </p>
           <div v-if="cashReceived > selectedOrder.total" class="total">
-            Change amount: RM {{ cashChange }}
+            Change amount: {{ $t("currency") }} {{ cashChange }}
           </div>
         </div>
         <div class="payment-actions">
@@ -185,6 +192,7 @@
 
 <script>
 import { computed } from "vue";
+import { useSettingStore } from "/src/stores/settingStore.js";
 import { useOrderStore } from "/src/stores/orderStore.js";
 import { useThemeStore } from "/src/stores/themeStore.js";
 import { storeToRefs } from "pinia";
@@ -193,6 +201,7 @@ export default {
   setup() {
     const orderStore = useOrderStore();
     const themeStore = useThemeStore();
+    const settingStore = useSettingStore();
     const { currentTheme } = storeToRefs(themeStore);
     const { orderHistory } = storeToRefs(orderStore);
     const { selectedOrder } = storeToRefs(orderStore);
@@ -244,6 +253,7 @@ export default {
       formatTimestamp,
       selectedOrder,
       selectOrder,
+      settingStore,
       formatMoney,
       currentTheme,
       noOrdersIcon,

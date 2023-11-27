@@ -27,20 +27,24 @@
         <ul>
           <li v-for="(item, itemIndex) in order.orderDetails" :key="item.name">
             <p class="itemIndex">{{ itemIndex + 1 }}</p>
-            {{ item.name }} x{{ item.quantity }} RM{{
-              item.lineTotal.toFixed(2)
-            }}
+            {{ item.name }} x{{ item.quantity }} = {{ $t("currency") }}
+            {{ item.lineTotal.toFixed(2) }}
           </li>
         </ul>
         <div class="total-wrapper">
           <div class="subtotal">
-            Subtotal: RM{{ order.subtotal.toFixed(2) }}
+            Subtotal: {{ $t("currency") }} {{ order.subtotal.toFixed(2) }}
           </div>
           <div class="serviceCharge">
-            Service Charge (10%): RM{{ order.serviceCharge.toFixed(2) }}
+            Service Charge (10%): {{ $t("currency") }}
+            {{ order.serviceCharge.toFixed(2) }}
           </div>
-          <div class="gst">GST (6%): RM{{ order.gst.toFixed(2) }}</div>
-          <div class="total">Total: RM{{ order.total.toFixed(2) }}</div>
+          <div class="gst">
+            GST (6%): {{ $t("currency") }} {{ order.gst.toFixed(2) }}
+          </div>
+          <div class="total">
+            Total: {{ $t("currency") }} {{ order.total.toFixed(2) }}
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +81,7 @@
 
 <script>
 import { useOrderStore } from "/src/stores/orderStore.js";
+import { useSettingStore } from "/src/stores/settingStore.js";
 import { useThemeStore } from "/src/stores/themeStore.js";
 import { useReservationStore } from "/src/stores/reservationStore.js";
 import { computed, reactive } from "vue";
@@ -93,6 +98,7 @@ export default {
       );
     });
     const orderStore = useOrderStore();
+    const settingStore = useSettingStore();
     const themeStore = useThemeStore();
     const selectedOrders = computed(() => {
       return orderStore.orderHistory.filter(
@@ -140,6 +146,7 @@ export default {
     return {
       selectedOrders,
       visibleOrders,
+      settingStore,
       toggleDetails,
       noOrdersIcon,
       paxIconPath,

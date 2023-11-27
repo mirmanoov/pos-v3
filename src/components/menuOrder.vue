@@ -74,9 +74,9 @@
           <li>
             <p class="itemIndex">{{ index + 1 }}</p>
             {{ item.name }}
-            {{ item.quantity }} x RM{{ item.price.toFixed(2) }} RM{{
-              (item.quantity * item.price).toFixed(2)
-            }}
+            {{ item.quantity }}x {{ $t("currency") }}
+            {{ item.price.toFixed(2) }} = {{ $t("currency") }}
+            {{ (item.quantity * item.price).toFixed(2) }}
           </li>
         </ul>
       </div>
@@ -86,12 +86,19 @@
       No orders added.
     </div>
     <div class="order-summary">
-      <div class="subtotal">Subtotal: RM{{ formatPrice(subtotal) }}</div>
-      <div class="serviceCharge">
-        Service Charge (10%): RM{{ formatPrice(serviceCharge) }}
+      <div class="subtotal">
+        Subtotal: {{ $t("currency") }} {{ formatPrice(subtotal) }}
       </div>
-      <div class="gst">GST (6%): RM{{ formatPrice(gst) }}</div>
-      <div class="total">Total: RM{{ formatPrice(totalComputed) }}</div>
+      <div class="serviceCharge">
+        Service Charge (10%): {{ $t("currency") }}
+        {{ formatPrice(serviceCharge) }}
+      </div>
+      <div class="gst">
+        GST (6%): {{ $t("currency") }} {{ formatPrice(gst) }}
+      </div>
+      <div class="total">
+        Total: {{ $t("currency") }} {{ formatPrice(totalComputed) }}
+      </div>
     </div>
     <div class="order-actions">
       <button @click="cancelOrder" class="cancel">Cancel Order</button>
@@ -103,15 +110,17 @@
 <script>
 import { useOrderStore } from "/src/stores/orderStore.js";
 import { useThemeStore } from "/src/stores/themeStore.js";
+import { useSettingStore } from "/src/stores/settingStore.js";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 export default {
   setup(props, { emit }) {
     // Use Pinia order store
     const orderStore = useOrderStore();
     const themeStore = useThemeStore();
+    const settingStore = useSettingStore();
     const sendButtonLabel = ref("Send Order");
     const router = useRouter(); // Import and use useRouter to get the router instance
     const {
@@ -135,6 +144,13 @@ export default {
     function cancelOrder() {
       orderStore.clearOrder();
     }
+
+    watch(
+      () => settingStore.currency,
+      (newCurrency) => {
+        console.log("Currency changed to:", newCurrency);
+      }
+    );
 
     function sendOrder() {
       console.log("Sending order...");
@@ -212,6 +228,7 @@ export default {
 
     return {
       orderDetails,
+      settingStore,
       total,
       orderID,
       tableID,

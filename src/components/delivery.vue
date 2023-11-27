@@ -49,23 +49,34 @@
         <div class="order-text">Order Check:</div>
         <ul>
           <li v-for="item in order.orderDetails" :key="item.name">
-            {{ item.name }} - RM{{ item.price.toFixed(2) }} x
-            {{ item.quantity }} = RM{{ item.lineTotal.toFixed(2) }}
+            {{ item.name }} - {{ $t("currency") }} {{ item.price.toFixed(2) }} x
+            {{ item.quantity }} = {{ $t("currency") }}
+            {{ item.lineTotal.toFixed(2) }}
           </li>
         </ul>
         <div>
           Subtotal:
-          <span class="bold-text">RM{{ order.subtotal.toFixed(2) }}</span>
+          <span class="bold-text"
+            >{{ $t("currency") }} {{ order.subtotal.toFixed(2) }}</span
+          >
         </div>
         <div>
           Service Charge (10%):
-          <span class="bold-text">RM{{ order.serviceCharge.toFixed(2) }}</span>
+          <span class="bold-text"
+            >{{ $t("currency") }} {{ order.serviceCharge.toFixed(2) }}</span
+          >
         </div>
         <div>
-          GST (6%): <span class="bold-text">RM{{ order.gst.toFixed(2) }}</span>
+          GST (6%):
+          <span class="bold-text"
+            >{{ $t("currency") }} {{ order.gst.toFixed(2) }}</span
+          >
         </div>
         <div>
-          Total: <span class="bold-text">RM{{ order.total.toFixed(2) }}</span>
+          Total:
+          <span class="bold-text"
+            >{{ $t("currency") }} {{ order.total.toFixed(2) }}</span
+          >
         </div>
         <div :class="`order-status ${getOrderStatus(order.timestamp)}`">
           {{ capitalize(getOrderStatus(order.timestamp)) }}
@@ -82,6 +93,7 @@
 <script>
 import { useOrderStore } from "/src/stores/orderStore.js";
 import { useThemeStore } from "/src/stores/themeStore.js";
+import { useSettingStore } from "/src/stores/settingStore.js";
 import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 
@@ -89,6 +101,7 @@ export default {
   setup() {
     const orderStore = useOrderStore();
     const themeStore = useThemeStore();
+    const settingStore = useSettingStore();
     const { orderHistory } = storeToRefs(orderStore);
 
     // Computed property to filter delivery orders
@@ -140,6 +153,7 @@ export default {
     return {
       filteredDeliveryOrders,
       formatTimestamp,
+      settingStore,
       filteredDeliveryOrders,
       formatTimestamp,
       getOrderStatus,

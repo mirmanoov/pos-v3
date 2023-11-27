@@ -9,6 +9,7 @@ import takeaway from "/src/components/takeaway.vue";
 import order from "/src/components/order.vue";
 import orderComponent from "/src/components/menuOrder.vue";
 import reservations from "/src/components/reservations.vue";
+import settings from "/src/components/settings.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,6 +67,11 @@ const router = createRouter({
       path: "/reservations",
       name: "reservations",
       component: reservations,
+    },
+    {
+      path: "/settings",
+      name: "settings",
+      component: settings,
     },
   ],
 });
