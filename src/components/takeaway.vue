@@ -28,12 +28,6 @@
           >
         </div>
 
-        <div>
-          Estimated Total Waiting Time:
-          <span class="bold-text">
-            {{ order.estimatedTotalWaitingTime }} minutes</span
-          >
-        </div>
         <div class="order-text">Order Check:</div>
         <ul>
           <li v-for="item in order.orderDetails" :key="item.name">
