@@ -48,6 +48,15 @@ export default {
       errorMessage: "",
     };
   },
+  mounted() {
+    // Add a global event listener for the 'Enter' key
+    window.addEventListener("keyup", this.handleEnterPress);
+  },
+
+  unmounted() {
+    // Remove the event listener when the component is unmounted
+    window.removeEventListener("keyup", this.handleEnterPress);
+  },
   methods: {
     callback(response) {
       if (response.error) {
@@ -56,6 +65,13 @@ export default {
         this.$emit("login-success", response);
       }
     },
+    handleEnterPress(event) {
+      // Check if the pressed key is 'Enter'
+      if (event.key === "Enter") {
+        this.loginWithCredentials();
+      }
+    },
+
     loginWithCredentials() {
       if (this.username === "egor" && this.password === "vrnsky") {
         this.$emit("login-success", { username: this.username });
