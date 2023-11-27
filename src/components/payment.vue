@@ -323,7 +323,7 @@ export default {
   display: flex;
   justify-content: space-between;
   color: var(--text-color);
-  min-height: 100vh;
+  min-height: 120vh;
 }
 
 .payableAmount {

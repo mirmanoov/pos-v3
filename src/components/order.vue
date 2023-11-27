@@ -172,7 +172,7 @@ export default {
   display: flex !important;
   flex-direction: column !important; /* Stacks children vertically */
   padding: 20px;
-  height: 100vh;
+  min-height: 120vh;
   background-color: var(--active-color);
   border-radius: none !important;
   box-shadow: none !important;
@@ -185,7 +185,7 @@ export default {
   background-color: #484444;
   border-radius: none !important;
   box-shadow: none !important;
-  height: 100vh;
+  min-height: 120vh;
 }
 
 .order-summary h3 {
