@@ -4,6 +4,10 @@
     <div class="table-row">
       <div
         class="table-container round"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['R1']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -18,6 +22,10 @@
       </div>
       <div
         class="table-container big-rectangle"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['R2']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -42,6 +50,10 @@
       </div>
       <div
         class="table-container round"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['R3']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -60,6 +72,10 @@
     <div class="table-row">
       <div
         class="table-container round"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['R4', 'R5']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -74,6 +90,10 @@
       </div>
       <div
         class="table-container big-rectangle"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['R6']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -101,7 +121,34 @@
 </template>
 
 <script>
+import { useReservationStore } from "/src/stores/reservationStore.js";
+import { useOrderStore } from "/src/stores/orderStore.js";
+import { computed } from "vue";
 export default {
+  setup() {
+    // Access the reservation store
+    const reservationStore = useReservationStore();
+    const orderStore = useOrderStore();
+
+    // Computed property to get a list of reserved table IDs
+    const reservedTableIds = computed(() => {
+      return reservationStore.reservations.map(
+        (reservation) => reservation.tableId
+      );
+    });
+    const activeOrderTableIds = computed(() => {
+      return orderStore.orderHistory.map((order) => order.tableID);
+    });
+
+    const selectTable = (tableId) => {
+      console.log("Selected table:", tableId);
+    };
+    return {
+      activeOrderTableIds,
+      reservedTableIds,
+      selectTable,
+    };
+  },
   data() {
     return {
       roundTables: [
@@ -155,6 +202,18 @@ export default {
   justify-content: center;
   justify-content: space-between;
   gap: 100px; /* Space between tables in the same row */
+}
+
+.reserved-table .rectangle-table,
+.reserved-table .big-rectangle-table,
+.reserved-table .round-table {
+  background-color: yellow; /* or any color you prefer */
+}
+
+.active-order-table .rectangle-table,
+.active-order-table .big-rectangle-table,
+.active-order-table .round-table {
+  background-color: #91f8b4; /* or any color you prefer for active orders */
 }
 
 .table-container {

@@ -72,7 +72,7 @@
 
       <div class="reservation-grid">
         <div
-          v-for="reservation in filteredReservations(dateHeader)"
+          v-for="reservation in getReservationsByDate(dateHeader)"
           :key="reservation.id"
           class="reservation-card"
         >
@@ -96,47 +96,31 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      showForm: false,
-      reservationDates: ["07/12/2023 - Monday", "08/12/2023 - Tuesday"],
-      reservations: [
-        {
-          id: 1,
-          name: "Michael Leong",
-          room: "Retail Room",
-          tableId: "R2",
-          date: "12/07/2023",
-          time: "19:30",
-          pax: 2,
-          mobile: "017-871-0380",
-          status: "Confirmed",
-        },
-        {
-          id: 2,
-          name: "Elon Musk",
-          room: "Garden Room",
-          tableId: "G6",
-          date: "12/08/2023",
-          time: "14:50",
-          pax: 5,
-          mobile: "016-454-7820",
-          status: "Confirmed",
-        },
-        {
-          id: 2,
-          name: "Sam Altman",
-          room: "VIP Room",
-          tableId: "V1",
-          date: "12/08/2023",
-          time: "12:00",
-          pax: 1,
-          mobile: "013-496-0290",
-          status: "Confirmed",
-        },
-      ],
-      newReservation: {
+import { defineComponent, ref, computed, onMounted } from "vue";
+import { useReservationStore } from "/src/stores/reservationStore.js";
+
+export default defineComponent({
+  setup() {
+    const reservationStore = useReservationStore();
+
+    const toggleForm = () => {
+      showForm.value = !showForm.value;
+    };
+
+    onMounted(() => {
+      reservationStore.initializeStore();
+      console.log("Initial reservations:", reservationStore.reservations);
+    });
+
+    const addReservation = () => {
+      console.log("Adding reservation:", newReservation.value);
+      reservationStore.addReservation({ ...newReservation.value });
+      resetForm();
+      toggleForm();
+    };
+
+    const resetForm = () => {
+      newReservation.value = {
         name: "",
         room: "",
         tableId: "",
@@ -144,68 +128,35 @@ export default {
         time: "",
         pax: "",
         mobile: "",
-      },
+        status: "",
+      };
+    };
+
+    const showForm = ref(false);
+    const newReservation = ref({
+      name: "",
+      room: "",
+      tableId: "",
+      date: "",
+      time: "",
+      pax: "",
+      mobile: "",
+      status: "",
+    });
+
+    return {
+      showForm,
+      newReservation,
+      toggleForm,
+      addReservation,
+      resetForm,
+
+      reservations: computed(() => reservationStore.reservations),
+      reservationDates: computed(() => reservationStore.reservationDates),
+      getReservationsByDate: reservationStore.getReservationsByDate,
     };
   },
-  methods: {
-    toggleForm() {
-      this.showForm = !this.showForm;
-    },
-    filteredReservations(dateHeader) {
-      return this.reservations.filter((reservation) => {
-        const reservationDate = new Date(reservation.date).toLocaleDateString();
-        return dateHeader.startsWith(reservationDate);
-      });
-    },
-    addReservation() {
-      const newRes = {
-        ...this.newReservation,
-        id: Date.now(),
-        status: "Confirmed",
-      };
-
-      // Check if the date already exists in the reservationDates array
-      const inputDate = new Date(this.newReservation.date).toLocaleDateString();
-      const dateExists = this.reservationDates.some((date) =>
-        date.startsWith(inputDate)
-      );
-
-      if (!dateExists) {
-        // Add the new date header if it doesn't exist
-        const dayOfWeek = new Date(this.newReservation.date).toLocaleDateString(
-          "en-US",
-          { weekday: "long" }
-        );
-        this.reservationDates.push(`${inputDate} - ${dayOfWeek}`);
-        this.sortDates(); // Call to sort the dates
-      }
-
-      // Add the new reservation
-      this.reservations.push(newRes);
-      this.resetForm();
-      this.toggleForm();
-    },
-    resetForm() {
-      this.newReservation = {
-        name: "",
-        room: "",
-        tableId: "",
-        date: "",
-        time: "",
-        pax: "",
-        mobile: "",
-      };
-    },
-    sortDates() {
-      this.reservationDates.sort((a, b) => {
-        // Extracting the date part from the date string
-        const dateA = new Date(a.split(" - ")[0]);
-        const dateB = new Date(b.split(" - ")[0]);
-        return dateA - dateB;
-      });
-    },
-  },
-};
+});
 </script>
 
 <style scoped>

@@ -6,6 +6,10 @@
         v-for="tableId in ['V1']"
         :key="tableId"
         class="table-container rectangle"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         @click="selectTable(tableId)"
       >
         <div class="table rectangle-table">{{ tableId }}</div>
@@ -33,6 +37,10 @@
         v-for="tableId in ['V2']"
         :key="tableId"
         class="table-container rectangle"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         @click="selectTable(tableId)"
       >
         <div class="table rectangle-table">{{ tableId }}</div>
@@ -64,6 +72,10 @@
         v-for="tableId in ['V3']"
         :key="tableId"
         class="table-container big-rectangle"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         @click="selectTable(tableId)"
       >
         <div class="table big-rectangle-table">{{ tableId }}</div>
@@ -92,7 +104,34 @@
 </template>
 
 <script>
+import { useReservationStore } from "/src/stores/reservationStore.js";
+import { useOrderStore } from "/src/stores/orderStore.js";
+import { computed } from "vue";
 export default {
+  setup() {
+    // Access the reservation store
+    const reservationStore = useReservationStore();
+    const orderStore = useOrderStore();
+
+    // Computed property to get a list of reserved table IDs
+    const reservedTableIds = computed(() => {
+      return reservationStore.reservations.map(
+        (reservation) => reservation.tableId
+      );
+    });
+    const activeOrderTableIds = computed(() => {
+      return orderStore.orderHistory.map((order) => order.tableID);
+    });
+
+    const selectTable = (tableId) => {
+      console.log("Selected table:", tableId);
+    };
+    return {
+      activeOrderTableIds,
+      reservedTableIds,
+      selectTable,
+    };
+  },
   data() {
     return {
       rectangleTables: [
@@ -211,6 +250,17 @@ export default {
   bottom: -35px;
   left: 50%;
   transform: translateX(-50%);
+}
+.reserved-table .rectangle-table,
+.reserved-table .big-rectangle-table,
+.reserved-table .round-table {
+  background-color: yellow; /* or any color you prefer */
+}
+
+.active-order-table .rectangle-table,
+.active-order-table .big-rectangle-table,
+.active-order-table .round-table {
+  background-color: #91f8b4; /* or any color you prefer for active orders */
 }
 
 .rectangle-table:hover,

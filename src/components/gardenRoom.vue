@@ -4,6 +4,10 @@
     <div class="table-row">
       <div
         class="table-container long-rectangle"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['G1']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -28,6 +32,10 @@
       </div>
       <div
         class="table-container square"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['G2', 'G3', 'G4']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -46,6 +54,10 @@
     <div class="table-row">
       <div
         class="table-container square"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['G5']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -63,6 +75,10 @@
       </div>
       <div
         class="table-container long-rectangle"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['G6']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -91,6 +107,10 @@
     <div class="table-row">
       <div
         class="table-container square"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['G7', 'G8', 'G9']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -106,6 +126,10 @@
       </div>
       <div
         class="table-container long-rectangle"
+        :class="{
+          'reserved-table': reservedTableIds.includes(tableId),
+          'active-order-table': activeOrderTableIds.includes(tableId),
+        }"
         v-for="tableId in ['G10']"
         :key="tableId"
         @click="selectTable(tableId)"
@@ -133,7 +157,34 @@
 </template>
 
 <script>
+import { useReservationStore } from "/src/stores/reservationStore.js";
+import { useOrderStore } from "/src/stores/orderStore.js";
+import { computed } from "vue";
 export default {
+  setup() {
+    // Access the reservation store
+    const reservationStore = useReservationStore();
+    const orderStore = useOrderStore();
+
+    // Computed property to get a list of reserved table IDs
+    const reservedTableIds = computed(() => {
+      return reservationStore.reservations.map(
+        (reservation) => reservation.tableId
+      );
+    });
+    const activeOrderTableIds = computed(() => {
+      return orderStore.orderHistory.map((order) => order.tableID);
+    });
+
+    const selectTable = (tableId) => {
+      console.log("Selected table:", tableId);
+    };
+    return {
+      activeOrderTableIds,
+      reservedTableIds,
+      selectTable,
+    };
+  },
   data() {
     return {
       selectedTableId: null,
@@ -189,6 +240,18 @@ export default {
 .long-rectangle-table:hover {
   background-color: #78ccc7; /* Change the background color */
   border: 2px solid black; /* Change the border style */
+}
+
+.reserved-table .rectangle-table,
+.reserved-table .long-rectangle-table,
+.reserved-table .square-table {
+  background-color: yellow; /* or any color you prefer */
+}
+
+.active-order-table .rectangle-table,
+.active-order-table .long-rectangle-table,
+.active-order-table .square-table {
+  background-color: #91f8b4; /* or any color you prefer for active orders */
 }
 
 .square-table {

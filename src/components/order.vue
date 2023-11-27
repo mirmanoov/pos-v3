@@ -44,9 +44,33 @@
         </div>
       </div>
     </div>
-    <div v-if="!selectedOrders.length" class="no-orders">
-      <img :src="noOrdersIcon" alt="No Orders" />
-      No orders for this table.
+    <!-- Reservation details display -->
+    <div v-if="reservationDetails" class="reservation-summary">
+      <h3 class="reservation-title">
+        Reservation Details for Table {{ selectedTable }}
+      </h3>
+      <div class="reservation-details">
+        <p><strong>Name:</strong> {{ reservationDetails.name }}</p>
+        <p><strong>Room:</strong> {{ reservationDetails.room }}</p>
+        <p><strong>Date:</strong> {{ reservationDetails.date }}</p>
+        <p><strong>Time:</strong> {{ reservationDetails.time }}</p>
+        <p>
+          <strong>Number of Guests (PAX):</strong> {{ reservationDetails.pax }}
+        </p>
+        <p><strong>Mobile:</strong> {{ reservationDetails.mobile }}</p>
+        <p><strong>Status:</strong> {{ reservationDetails.status }}</p>
+      </div>
+    </div>
+    <div v-if="!selectedOrders.length && !reservationDetails">
+      <div class="status-container">
+        <div class="status free">Free</div>
+        <div class="status reserved">Reserved</div>
+        <div class="status taken">Taken</div>
+      </div>
+      <div class="no-orders">
+        <img :src="noOrdersIcon" alt="No Orders" />
+        No orders for this table.
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +78,7 @@
 <script>
 import { useOrderStore } from "/src/stores/orderStore.js";
 import { useThemeStore } from "/src/stores/themeStore.js";
+import { useReservationStore } from "/src/stores/reservationStore.js";
 import { computed, reactive } from "vue";
 
 export default {
@@ -61,6 +86,12 @@ export default {
     selectedTable: String,
   },
   setup(props) {
+    const reservationStore = useReservationStore();
+    const reservationDetails = computed(() => {
+      return reservationStore.reservations.find(
+        (reservation) => reservation.tableId === props.selectedTable
+      );
+    });
     const orderStore = useOrderStore();
     const themeStore = useThemeStore();
     const selectedOrders = computed(() => {
@@ -114,12 +145,43 @@ export default {
       paxIconPath,
       tableIconPath,
       getChevronIcon,
+      reservationDetails,
     };
   },
 };
 </script>
 
 <style scoped>
+.status-container {
+  display: flex; /* This makes sure all child elements are in one row */
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 35px;
+  border-bottom: 1px dashed #ccc;
+}
+
+.status {
+  padding: 10px; /* Add some padding */
+  margin-left: 10px;
+  margin-top: 19px;
+  color: black;
+  border-radius: 20px;
+  font-weight: 500;
+  min-width: 5vw;
+  text-align: center;
+}
+
+.free {
+  background-color: var(--table-bg-color); /* Background color for 'Free' */
+}
+
+.reserved {
+  background-color: yellow; /* Background color for 'Reserved' */
+}
+
+.taken {
+  background-color: #91f8b4; /* Background color for 'Taken' */
+}
 .no-orders img {
   margin-bottom: 10px;
 }
@@ -132,6 +194,32 @@ export default {
 
 [data-theme="dark"] .order-details {
   background-color: #484444;
+}
+
+.reservation-summary {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: var(--active-color);
+  border-radius: 4px;
+  border: 1px solid var(--text-color);
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+.reservation-title {
+  margin-bottom: 10px;
+  color: var(--text-color);
+  border-bottom: 0.5px dashed var(--text-color);
+  padding-bottom: 20px;
+}
+
+.reservation-details p {
+  margin: 5px 0;
+  margin-top: 20px;
+  color: var(--text-color);
+}
+
+.reservation-details strong {
+  font-weight: 600;
 }
 
 .order-summary h3,
@@ -157,7 +245,7 @@ export default {
 
 .no-orders {
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex !important;
