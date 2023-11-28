@@ -29,7 +29,7 @@
         <div class="namePrice">
           <span>{{ item.name }}</span>
           <div class="price">
-            <span>RM{{ item.price }}</span>
+            <span>{{ $t("currency") }} {{ item.price }}</span>
             <div class="itemAmount">
               <button @click="orderStore.addToOrder(item)" class="plus">
                 +
@@ -49,6 +49,7 @@
 <script>
 import { ref, reactive, watch } from "vue";
 import { useOrderStore } from "/src/stores/orderStore.js";
+import { useSettingStore } from "/src/stores/settingStore.js";
 import { useSearchStore } from "/src/stores/searchStore.js";
 import { useThemeStore } from "/src/stores/themeStore.js";
 
@@ -57,6 +58,7 @@ export default {
     const searchStore = useSearchStore();
     const selectedCategory = ref(null);
     const orderStore = useOrderStore();
+    const settingStore = useSettingStore();
     const themeStore = useThemeStore();
 
     // React to changes in search term
@@ -222,6 +224,7 @@ export default {
       selectedCategory,
       menu,
       selectCategory,
+      settingStore,
       getOrderQuantity,
       // Directly expose order store's properties and methods
       orderStore,
