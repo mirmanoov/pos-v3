@@ -97,6 +97,20 @@ export default {
   height: auto; /* Set a fixed width for the modal */
 }
 
+@media (max-width: 849px) {
+  .modal-content {
+    background-color: white; /* White background for the modal */
+    border-radius: 57px; /* Rounded corners */
+    padding: 20px; /* Padding around the content */
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center items horizontally */
+    gap: 2vh;
+    width: auto;
+    height: auto; /* Set a fixed width for the modal */
+  }
+}
+
 .modal-content h2 {
   padding-top: 5vh;
 

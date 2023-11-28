@@ -161,6 +161,25 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 849px) {
+  .chair {
+    position: absolute;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .round-table {
+    width: 40px !important;
+    font-size: 14px !important;
+    height: 40px !important;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+  .lounge-room {
+    padding-top: 25px !important;
+  }
+}
 .lounge-room {
   display: flex;
   flex-direction: column;

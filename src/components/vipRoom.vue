@@ -157,6 +157,37 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 849px) {
+  .rectangle-table {
+    width: 40px !important;
+    height: 350px !important;
+  }
+
+  .big-rectangle-table {
+    width: 18vw;
+    height: 12vh;
+    position: relative;
+    z-index: 1;
+  }
+  .flower-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flowers {
+    width: 70px !important;
+    height: auto;
+  }
+
+  .chair-left {
+    right: 40px !important;
+  }
+
+  .chair-right {
+    left: 67px !important;
+  }
+}
 .VIPRoom {
   display: flex;
   flex-direction: column;

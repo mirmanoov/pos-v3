@@ -216,6 +216,32 @@ export default {
 };
 </script>
 <style scoped>
+@media (max-width: 849px) {
+  .chair {
+    position: absolute;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .square-table {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .long-rectangle-table {
+    width: 100px !important;
+    height: 50px !important;
+  }
+
+  .garden-room {
+    padding-top: 25px !important;
+  }
+
+  .flower-container {
+    width: 150px !important; /* Adjust this as needed */
+    height: 50px !important; /* This makes the container square, adjust as needed */
+  }
+}
 .garden-room {
   display: flex;
   flex-direction: column;

@@ -318,6 +318,40 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 849px) {
+  .order-layout {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .history-item table {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .history-item table > * {
+    display: grid !important;
+  }
+
+  .history-header-labels {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .payableAmount {
+    border-top: 1px solid var(--text-color) !important;
+  }
+
+  .order-layout > * {
+    width: 100% !important;
+    box-sizing: border-box !important; /* Include padding and border in the width */
+  }
+
+  .no-order-message,
+  .add-message {
+    padding-bottom: 300px !important;
+  }
+}
 .history {
   text-align: center;
   font-size: 24px;

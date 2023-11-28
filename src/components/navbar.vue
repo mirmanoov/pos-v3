@@ -23,6 +23,14 @@
           alt="Theme"
         />
       </button>
+      <!-- Hamburger Menu Icon -->
+      <img
+        v-if="isMobileView"
+        :src="currentTheme === 'light' ? '/menu-black.svg' : '/menu-white.svg'"
+        alt="Menu"
+        class="menu-icon"
+        @click="openModal"
+      />
     </div>
   </nav>
 </template>
@@ -63,6 +71,13 @@ export default {
       applyTheme(themeStore.currentTheme);
     };
 
+    const isMobileView = computed(() => window.innerWidth < 849);
+
+    const openModal = () => {
+      console.log("openModal called");
+      emit("open-mobile-modal");
+    };
+
     onMounted(() => {
       applyTheme(themeStore.currentTheme);
     });
@@ -73,6 +88,8 @@ export default {
       currentTheme: computed(() => themeStore.currentTheme),
       searchInput,
       submitSearch,
+      isMobileView,
+      openModal,
     };
   },
 };
@@ -112,6 +129,27 @@ export default {
   max-width: 21vw;
 }
 
+.menu-icon {
+  width: 25px;
+  height: 35px;
+  padding-bottom: 2px;
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 849px) {
+  .menu-icon {
+    display: block; /* Show only in mobile view */
+    /* Add additional styling as needed */
+  }
+
+  /* Hide other elements as required */
+  .date-time,
+  .search-input {
+    display: none;
+  }
+}
+
 [data-theme="dark"] .left-content {
   gap: 11vw;
 }
@@ -129,7 +167,7 @@ export default {
   gap: 10vw; /* adjust accordingly */
 }
 
-@media (min-width: 700px) {
+@media (min-width: 849px) {
   .search-input {
     width: 21vw;
     flex-grow: 0;
@@ -151,19 +189,17 @@ export default {
     color: white;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 849px) {
   .date-time {
     display: none;
   }
 
   [data-theme="dark"] .search-input {
-    min-height: 5vh;
-    max-height: 5vh;
-    margin-top: 2vh;
-    min-width: 42vw;
-    max-width: 42vw;
-    color: var(--text-color);
-    background: var(--navbar-bg-color);
+    display: none !important;
+  }
+
+  .search-input {
+    display: none !important;
   }
 
   .right-content {

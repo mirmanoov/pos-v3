@@ -232,6 +232,53 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 849px) {
+  .menu-section {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-top: 25px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .menu-categories {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    flex-direction: column !important;
+  }
+
+  .menu-categories button {
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .category,
+  .category-items,
+  .category-wrapper {
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .menu-items {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    flex-direction: column !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-bottom: 25px !important;
+    border-bottom: 1px solid black !important;
+  }
+
+  .menu-item {
+    align-items: center !important;
+    text-align: center !important;
+    width: auto !important;
+  }
+}
 .menu-section {
   padding: 1rem;
   overflow-y: auto;

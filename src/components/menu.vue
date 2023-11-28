@@ -18,6 +18,18 @@ export default {
 </script>
 
 <style>
+@media (max-width: 849px) {
+  .menu-container {
+    flex-direction: column !important;
+  }
+  .menu-section {
+    width: 100% !important;
+    border-right: none !important;
+  }
+  .order-section {
+    width: 100% !important;
+  }
+}
 .menu-container {
   display: flex;
   height: 100%;

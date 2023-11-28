@@ -8,18 +8,27 @@
   />
   <div v-if="isAuthenticated">
     <!-- Navbar Component -->
-    <Navbar />
+    <Navbar @open-mobile-modal="handleMobileModalOpen" />
+    <MobModal
+      v-if="showMobileModal"
+      :is-visible="showMobileModal"
+      @close="showMobileModal = false"
+      @link-selected="updateMainComponent"
+    />
 
     <div class="container">
       <!-- Sidebar Component -->
-      <Sidebar @link-selected="updateMainComponent" />
+      <Sidebar v-if="windowWidth > 849" @link-selected="updateMainComponent" />
 
-      <main class="mains"><component :is="currentComponent"></component></main>
+      <main class="mains">
+        <component :is="currentComponent"></component>
+      </main>
     </div>
   </div>
 </template>
 <script>
-import { watch } from "vue";
+import { watch, onMounted, onBeforeUnmount, ref } from "vue";
+import MobModal from "/src/components/mob-modal.vue";
 import { useSearchStore } from "/src/stores/searchStore.js";
 import GoogleLoginModal from "/src/components/GoogleLoginModal.vue";
 import Navbar from "/src/components/navbar.vue";
@@ -38,12 +47,33 @@ export default {
     Navbar,
     Sidebar,
     GoogleLoginModal,
+    MobModal,
+  },
+  setup() {
+    const windowWidth = ref(window.innerWidth);
+
+    const updateWidth = () => {
+      windowWidth.value = window.innerWidth;
+    };
+
+    onMounted(() => {
+      window.addEventListener("resize", updateWidth);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener("resize", updateWidth);
+    });
+
+    return {
+      windowWidth,
+    };
   },
   data() {
     return {
       currentComponent: tables,
       showLoginModal: true, // Initially true to show login on app load
       isAuthenticated: false, // Authentication state
+      showMobileModal: false,
     };
   },
   mounted() {
@@ -86,6 +116,11 @@ export default {
           this.currentComponent = null;
       }
     },
+    handleMobileModalOpen() {
+      console.log("Before opening modal:", this.showMobileModal);
+      this.showMobileModal = true;
+      console.log("After opening modal:", this.showMobileModal);
+    },
     onLoginSuccess(googleUser) {
       this.isAuthenticated = true;
       this.showLoginModal = false;
@@ -117,6 +152,21 @@ main {
   flex-grow: 1;
   padding: 20px;
   background-color: var(--active-color);
+}
+
+@media (max-width: 849px) {
+  body {
+    flex-direction: column;
+    max-width: 100% !important;
+  }
+
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .sidebar {
+    display: none;
+  }
 }
 
 :root {

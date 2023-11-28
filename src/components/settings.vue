@@ -205,6 +205,53 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 849px) {
+  .settings-wrapper {
+    max-width: 100% !important;
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+
+  .row-container {
+    flex-direction: column !important;
+    gap: 2vh !important;
+  }
+
+  .column-1,
+  .column-2 {
+    width: 100% !important;
+  }
+
+  .input-field,
+  select {
+    min-width: 95% !important;
+    max-width: 95% !important;
+  }
+
+  .settings {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .photo-container {
+    justify-content: center !important;
+  }
+
+  .edit-icon {
+    display: none !important; /* Adjust this as needed for proper alignment */
+  }
+
+  .profPic {
+    align-items: center !important;
+  }
+
+  .success-message {
+    padding-top: 20px !important;
+    text-align: center !important;
+    padding-bottom: 20px !important;
+  }
+}
+
 .settings {
   margin-top: 5vh;
   color: var(--text-color);

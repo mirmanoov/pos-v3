@@ -10,6 +10,7 @@ import order from "/src/components/order.vue";
 import orderComponent from "/src/components/menuOrder.vue";
 import reservations from "/src/components/reservations.vue";
 import settings from "/src/components/settings.vue";
+import modal from "/src/components/mob-modal.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +57,12 @@ const router = createRouter({
       path: "/order",
       name: "order",
       component: order,
+      props: true,
+    },
+    {
+      path: "/modal",
+      name: "modal",
+      component: modal,
       props: true,
     },
     {

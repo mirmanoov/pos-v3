@@ -35,6 +35,32 @@ export default {
   width: 100%;
 }
 
+@media (min-width: 849px) and (max-width: 1024px) {
+  .tables-component {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 849px) {
+  .tables-component {
+    flex-direction: column;
+    max-width: 100% !important;
+  }
+
+  .order {
+    margin-top: 10vh;
+  }
+
+  .dashboard {
+    width: 100% !important;
+  }
+
+  .order {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
 .dashboard {
   width: 70%;
 }

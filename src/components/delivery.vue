@@ -165,6 +165,36 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 849px) {
+  .delivery-wrapper {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .delivery-history {
+    width: fit-content !important;
+  }
+
+  .delivery-item {
+    width: fit-content !important;
+    min-width: fit-content !important;
+    margin-bottom: 20px !important; /* Spacing between items */
+    padding: 10px !important; /* Adjust padding for smaller screens */
+  }
+
+  .delivery-item .order-text,
+  .delivery-item .bold-text,
+  .delivery-item ul,
+  .delivery-item div {
+    font-size: 14px !important; /* Adjust font size for readability */
+  }
+
+  /* Adjusting the order-wrapper for better layout on smaller screens */
+  .order-wrapper {
+    flex-direction: column !important;
+    gap: 5px !important;
+  }
+}
 .delivery-history {
   font-family: Arial, sans-serif;
   margin: 0 auto;

@@ -253,6 +253,21 @@ export default {
 };
 </script>
 <style scoped>
+@media (max-width: 849px) {
+  .order-component {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .order-items,
+  .order-summary,
+  .order-actions {
+    padding: 20px !important;
+  }
+  .order-summary {
+    margin: 20px !important;
+  }
+}
 .order-component {
   display: flex;
   flex-direction: column;

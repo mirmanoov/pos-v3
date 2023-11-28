@@ -167,6 +167,40 @@ export default {
   border-bottom: 1px dashed #ccc;
 }
 
+@media (max-width: 849px) {
+  .order-component {
+    display: flex !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
+  }
+  .reservation-summary {
+    padding: 60px !important;
+    align-items: center !important;
+    text-align: justify !important;
+    border-radius: 0 !important;
+  }
+
+  .status-container {
+    padding-top: 35px;
+    border-top: 0.5px solid black;
+  }
+
+  .order-summary,
+  .orderLabel {
+    padding: 20px !important;
+  }
+
+  .order-summary,
+  .order-list,
+  .order-details,
+  .orderLabel {
+    border-radius: 0 !important;
+  }
+}
+
 .status {
   padding: 10px; /* Add some padding */
   margin-left: 10px;

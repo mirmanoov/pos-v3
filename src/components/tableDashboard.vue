@@ -67,6 +67,34 @@ export default {
   border-right: 0.2px solid #000;
 }
 
+@media (max-width: 849px) {
+  .table-dashboard {
+    border-right: none;
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 14px !important;
+  }
+
+  .room-nav {
+    display: flex !important;
+
+    flex-direction: row !important;
+    width: 100% !important;
+    padding: 0 !important;
+    padding-top: 2vh !important;
+    padding-bottom: 2vh !important;
+    gap: 1vw !important;
+    margin: 0 !important;
+  }
+
+  .room-nav button {
+    width: 100% !important;
+    font-size: 14px !important;
+    padding: 0.5rem !important;
+    margin: 0 !important;
+  }
+}
+
 .room-nav {
   display: flex;
   justify-content: center;
@@ -93,18 +121,6 @@ export default {
 
 .tables {
   flex-grow: 1;
-}
-
-.room-nav button {
-  width: 100%;
-  margin: 0 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  background-color: var(--btn-color);
-  color: var(--text-color);
-  font-size: 16px;
 }
 
 .room-nav button:hover {

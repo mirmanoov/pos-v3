@@ -105,6 +105,18 @@ export default {
   align-items: center; /* Center align the child elements */
 }
 
+@media (max-width: 849px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (min-width: 849px) and (max-width: 1024px) {
+  .sidebar {
+    font-size: 12px;
+  }
+}
+
 .nav-links {
   list-style: none;
   padding: 0;

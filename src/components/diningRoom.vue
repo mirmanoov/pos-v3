@@ -154,6 +154,50 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 849px) {
+  .table-row {
+    gap: 40px !important; /* Space between tables in the same row */
+  }
+  .rectangle-table {
+    width: 25px !important;
+    height: 150px !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  .big-rectangle-table {
+    width: 18vw;
+    height: 12vh;
+    position: relative;
+    z-index: 1;
+  }
+  .dining-room {
+    margin: 0 !important;
+    margin-top: 25px !important;
+    padding: 0 !important;
+  }
+
+  .chair {
+    position: absolute;
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .round-table {
+    width: 40px !important;
+    font-size: 14px !important;
+    height: 40px !important;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+  .chair-left {
+    right: 95%;
+  }
+
+  .chair-right {
+    left: 150% !important;
+  }
+}
 .dining-room {
   display: flex;
   flex-direction: column;
