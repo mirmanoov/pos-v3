@@ -1,12 +1,6 @@
 <template>
-  <!-- Google Login Modal -->
-  <GoogleLoginModal
-    v-if="showLoginModal"
-    @close="showLoginModal = false"
-    @login-success="onLoginSuccess"
-    @login-failure="onLoginFailure"
-  />
-  <div v-if="isAuthenticated">
+  <!-- Removed GoogleLoginModal -->
+  <div>
     <!-- Navbar Component -->
     <Navbar @open-mobile-modal="handleMobileModalOpen" />
     <MobModal
@@ -26,11 +20,11 @@
     </div>
   </div>
 </template>
+
 <script>
 import { watch, onMounted, onBeforeUnmount, ref } from "vue";
 import MobModal from "/src/components/mob-modal.vue";
 import { useSearchStore } from "/src/stores/searchStore.js";
-import GoogleLoginModal from "/src/components/GoogleLoginModal.vue";
 import Navbar from "/src/components/navbar.vue";
 import Sidebar from "/src/components/sidebar.vue";
 import tables from "/src/components/tables.vue";
@@ -46,7 +40,6 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    GoogleLoginModal,
     MobModal,
   },
   setup() {
@@ -71,8 +64,7 @@ export default {
   data() {
     return {
       currentComponent: tables,
-      showLoginModal: true, // Initially true to show login on app load
-      isAuthenticated: false, // Authentication state
+      // Removed showLoginModal and isAuthenticated since login is no longer required
       showMobileModal: false,
     };
   },
@@ -120,15 +112,6 @@ export default {
       console.log("Before opening modal:", this.showMobileModal);
       this.showMobileModal = true;
       console.log("After opening modal:", this.showMobileModal);
-    },
-    onLoginSuccess(googleUser) {
-      this.isAuthenticated = true;
-      this.showLoginModal = false;
-      // You can store the googleUser details or token as needed
-    },
-    onLoginFailure(error) {
-      console.error("Login Failed:", error);
-      // Handle login failure, such as re-showing the login modal
     },
   },
 };
